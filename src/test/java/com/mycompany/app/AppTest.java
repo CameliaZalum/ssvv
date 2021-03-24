@@ -1,6 +1,9 @@
 package com.mycompany.app;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.security.AccessControlContext;
 
 import javax.sound.sampled.SourceDataLine;
 
@@ -66,9 +69,11 @@ public class AppTest
         String[] params={"22","nume1","grupa1","email@mail.com","prof"};
         try {
             stsrv.add(params);
-            assertTrue(true);
+            assertFalse(true);
         } catch (ValidatorException e){
-            assertTrue(false);
+            assertFalse(false);
         }
     }
+  
+
 }
