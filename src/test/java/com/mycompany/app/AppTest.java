@@ -11,6 +11,8 @@ import UI.ui;
 import Validator.NotaValidator;
 import Validator.StudentValidator;
 import Validator.TemaLabValidator;
+import jdk.internal.jline.internal.TestAccessible;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -70,6 +72,44 @@ public class AppTest
         }
     }
 
+    @Test
+    public void test(){
+        StudentValidator studentValidator=new StudentValidator();
+        TemaLabValidator homeworkValidator=new TemaLabValidator();
+        NotaValidator gradeValidator=new NotaValidator();
+        ui.vs = studentValidator;
+        ui.vt = homeworkValidator;
+        ui.vn = gradeValidator;
+        StudentXMLRepo studentRepository=new StudentXMLRepo(studentValidator,"StudentiXML.xml");
+        TemaLabXMLRepo homeworkRepository=new TemaLabXMLRepo(homeworkValidator,"TemaLaboratorXML.xml");
+        NotaXMLRepo gradeRepository=new NotaXMLRepo(gradeValidator,"NotaXML.xml");
+        StudentXMLService studentService=new StudentXMLService(studentRepository);
+        TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
+        NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+
+        // Empty ID
+        String[] parametersEmptyID={"","nume1","1","email@mail.com","prof"};
+        String expectedMessageEmptyID = "Id invalid";
+        try {
+            studentService.add(parametersEmptyID);
+            fail();
+        } catch (ValidatorException exception){ assertTrue(exception.getMessage().contains(expectedMessageEmptyID));}
+
+        // Not int ID
+        String[] parametersNotInt={"id","nume1","1","email@mail.com","prof"};
+        try {
+            studentService.add(parametersNotInt);
+            fail();
+        } catch (ValidatorException exception){ assertFalse(false);}
+
+        // Less than 0 ID
+        String[] parametersLessThanZeroID={"-1","nume1","grupa1","email@mail.com","prof"};
+        String expectedMessageLessThanZeroID = "invalid id";
+        try {
+            studentService.add(parametersLessThanZeroID);
+            assertFalse(true);
+        } catch (ValidatorException exception){ assertTrue(exception.getMessage().contains(expectedMessageLessThanZeroID));}
+    }
     /**
      * Incorrect IDs. An ID is incorrect if:
      * 1. it's empty;
