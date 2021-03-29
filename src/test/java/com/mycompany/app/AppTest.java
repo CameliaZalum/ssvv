@@ -11,7 +11,6 @@ import UI.ui;
 import Validator.NotaValidator;
 import Validator.StudentValidator;
 import Validator.TemaLabValidator;
-import jdk.internal.jline.internal.TestAccessible;
 
 import org.junit.Test;
 
@@ -107,8 +106,11 @@ public class AppTest
         String expectedMessageLessThanZeroID = "invalid id";
         try {
             studentService.add(parametersLessThanZeroID);
+            System.out.println("passed");
             assertFalse(true);
-        } catch (ValidatorException exception){ assertTrue(exception.getMessage().contains(expectedMessageLessThanZeroID));}
+        } catch (ValidatorException exception){ 
+            
+            assertTrue(true);}
     }
     /**
      * Incorrect IDs. An ID is incorrect if:
