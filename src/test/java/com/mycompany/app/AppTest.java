@@ -230,4 +230,50 @@ public class AppTest
         } catch (ValidatorException exception){ assertTrue(exception.getMessage().contains(expectedMessageMissingPeriod));}
     }
 
+    @Test
+    public void addAssignmentTestCase1 (){
+        StudentValidator studentValidator=new StudentValidator();
+        TemaLabValidator homeworkValidator=new TemaLabValidator();
+        NotaValidator gradeValidator=new NotaValidator();
+        ui.vs = studentValidator;
+        ui.vt = homeworkValidator;
+        ui.vn = gradeValidator;
+        StudentXMLRepo studentRepository=new StudentXMLRepo(studentValidator,"StudentiXML.xml");
+        TemaLabXMLRepo homeworkRepository=new TemaLabXMLRepo(homeworkValidator,"TemaLaboratorXML.xml");
+        NotaXMLRepo gradeRepository=new NotaXMLRepo(gradeValidator,"NotaXML.xml");
+        StudentXMLService studentService=new StudentXMLService(studentRepository);
+        TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
+        NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        String[] parametersAddAssignmentValid={"1", "descriere", "6", "4"};
+        try {
+            homeworkService.add(parametersAddAssignmentValid);
+            assertTrue(true);
+        } catch (ValidatorException exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addAssignmentTestCase2 (){
+        StudentValidator studentValidator=new StudentValidator();
+        TemaLabValidator homeworkValidator=new TemaLabValidator();
+        NotaValidator gradeValidator=new NotaValidator();
+        ui.vs = studentValidator;
+        ui.vt = homeworkValidator;
+        ui.vn = gradeValidator;
+        StudentXMLRepo studentRepository=new StudentXMLRepo(studentValidator,"StudentiXML.xml");
+        TemaLabXMLRepo homeworkRepository=new TemaLabXMLRepo(homeworkValidator,"TemaLaboratorXML.xml");
+        NotaXMLRepo gradeRepository=new NotaXMLRepo(gradeValidator,"NotaXML.xml");
+        StudentXMLService studentService=new StudentXMLService(studentRepository);
+        TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
+        NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        String[] parametersAddAssignmentInvalid={"1", "descriere", "3", "4"};
+        try {
+            homeworkService.add(parametersAddAssignmentInvalid);
+            assertFalse(true);
+        } catch (ValidatorException exception){ 
+            assertFalse(false);
+        }
+
+    }
 }
