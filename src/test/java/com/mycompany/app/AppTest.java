@@ -230,6 +230,19 @@ public class AppTest
         } catch (ValidatorException exception){ assertTrue(exception.getMessage().contains(expectedMessageMissingPeriod));}
     }
 
+
+    /**
+     * Successful add. A successful add is made when:
+     * -> the id :  ~ is not null or empty
+     *              ~ is a number
+     *              ~ is greater than 0
+     * -> the description : ~ is not null or empty
+     * -> the deliver week :    ~ is greater than 0 and it's less or equal than 14
+     *                          ~ is a number
+     * -> the due date :    ~ is greater than 0 and less or equal to 14
+     *                      ~ is a number
+     * -> the deliver week can't be higher than due date
+     */
     @Test
     public void addAssignmentTestCase1 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -244,6 +257,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentValid={"1", "descriere", "6", "4"};
         try {
             homeworkService.add(parametersAddAssignmentValid);
@@ -253,6 +267,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by deliver week being greater than due date.
+     */
     @Test
     public void addAssignmentTestCase2 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -267,6 +285,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "3", "4"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -276,6 +295,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by the id being 0.
+     */
     @Test
     public void addAssignmentTestCase3 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -290,6 +313,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"0", "descriere", "5", "4"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -299,6 +323,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add cause by empty description.
+     */
     @Test
     public void addAssignmentTestCase4 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -313,6 +341,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "", "5", "4"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -322,6 +351,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by empty due date.
+     */
     @Test
     public void addAssignmentTestCase5 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -336,6 +369,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "", "4"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -345,6 +379,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by due date being over 14.
+     */
     @Test
     public void addAssignmentTestCase6 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -359,6 +397,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "15", "4"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -368,6 +407,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by due date being a string.
+     */
     @Test
     public void addAssignmentTestCase7 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -382,6 +425,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "vb", "4"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -391,6 +435,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by deliver week being over 14.
+     */
     @Test
     public void addAssignmentTestCase8 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -405,6 +453,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "3", "15"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -414,6 +463,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by deliver week being empty.
+     */
     @Test
     public void addAssignmentTestCase9 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -428,6 +481,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "3", ""};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
@@ -437,6 +491,10 @@ public class AppTest
         }
 
     }
+
+    /**
+     * Unsuccessful add caused by deliver week being a string.
+     */
     @Test
     public void addAssignmentTestCase10 (){
         StudentValidator studentValidator=new StudentValidator();
@@ -451,6 +509,7 @@ public class AppTest
         StudentXMLService studentService=new StudentXMLService(studentRepository);
         TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        // addAssignment (id, description, dueDate, deliverWeek)
         String[] parametersAddAssignmentInvalid={"1", "descriere", "3", "hj"};
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
