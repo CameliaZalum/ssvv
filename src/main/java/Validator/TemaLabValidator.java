@@ -7,7 +7,7 @@ public class TemaLabValidator implements IValidator<TemaLab> {
 
     public void validate(TemaLab t) throws ValidatorException {
         String errors="";
-        if(t.getId()== null || t.getId().equals("") || t.getId() < 0){
+        if(t.getId()== null || t.getId().equals("") || t.getId() <= 0){
             errors += "Nr tema invalid\n";
         }
         if(t.getDescriere()== null || t.getDescriere().equals("")) {

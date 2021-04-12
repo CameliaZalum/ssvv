@@ -276,6 +276,7 @@ public class AppTest
         }
 
     }
+    @Test
     public void addAssignmentTestCase3 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -293,11 +294,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase4 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -315,11 +317,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase5 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -337,11 +340,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase6 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -359,11 +363,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase7 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -381,11 +386,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase8 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -403,11 +409,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase9 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -425,11 +432,12 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
     }
+    @Test
     public void addAssignmentTestCase10 (){
         StudentValidator studentValidator=new StudentValidator();
         TemaLabValidator homeworkValidator=new TemaLabValidator();
@@ -447,7 +455,7 @@ public class AppTest
         try {
             homeworkService.add(parametersAddAssignmentInvalid);
             assertFalse(true);
-        } catch (ValidatorException exception){ 
+        } catch (Exception exception){ 
             assertFalse(false);
         }
 
