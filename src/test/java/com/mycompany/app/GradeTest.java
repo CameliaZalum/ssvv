@@ -87,11 +87,21 @@ public class GradeTest
         NotaXMLService gradeService=new NotaXMLService(gradeRepository);
         String[] parametersAddGradeValid={"1","22","6","4", "feedback", "9"};
         try {
-            addStudentTestCase1();
-            addAssignmentTestCase1();
             gradeService.add(parametersAddGradeValid);
             assertTrue(true);
         } catch (ValidatorException exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addAllTestCase1 (){
+        try {
+            addStudentTestCase1();
+            addAssignmentTestCase1();
+            addGradeTestCase1();
+            assertTrue(true);
+        } catch (Exception exception){ 
             assertFalse(true);
         }
 
