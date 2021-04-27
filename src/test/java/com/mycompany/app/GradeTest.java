@@ -14,6 +14,10 @@ import Validator.TemaLabValidator;
 
 import org.junit.Test;
 
+import Domain.Nota;
+import Domain.Student;
+import Domain.TemaLab;
+
 import static org.junit.Assert.*;
 
 /**
@@ -21,24 +25,26 @@ import static org.junit.Assert.*;
  */
 public class GradeTest 
 {
+    StudentValidator vs=new StudentValidator();
+    TemaLabValidator vt=new TemaLabValidator();
+    NotaValidator vn=new NotaValidator();
+    StudentXMLRepo strepo=new StudentXMLRepo(vs,"StudentiXML.xml");
+    TemaLabXMLRepo tmrepo=new TemaLabXMLRepo(vt,"TemaLaboratorXML.xml");
+    NotaXMLRepo ntrepo=new NotaXMLRepo(vn,"NotaXML.xml");
+    StudentXMLService stsrv=new StudentXMLService(strepo);
+    TemaLabXMLService tmsrv=new TemaLabXMLService(tmrepo);
+    NotaXMLService ntsrv=new NotaXMLService(ntrepo);
     /**
      * Rigorous Test :-)
      */
     @Test
     public void addStudentTestCase1()
     {
-        StudentValidator vs=new StudentValidator();
-        TemaLabValidator vt=new TemaLabValidator();
-        NotaValidator vn=new NotaValidator();
+        
         ui.vs = vs;
         ui.vt = vt;
         ui.vn = vn;
-        StudentXMLRepo strepo=new StudentXMLRepo(vs,"StudentiXML.xml");
-        TemaLabXMLRepo tmrepo=new TemaLabXMLRepo(vt,"TemaLaboratorXML.xml");
-        NotaXMLRepo ntrepo=new NotaXMLRepo(vn,"NotaXML.xml");
-        StudentXMLService stsrv=new StudentXMLService(strepo);
-        TemaLabXMLService tmsrv=new TemaLabXMLService(tmrepo);
-        NotaXMLService ntsrv=new NotaXMLService(ntrepo);
+       
         String[] params={"22","nume1","1","email@mail.com","prof"};
         try {
             stsrv.add(params);
@@ -50,21 +56,14 @@ public class GradeTest
    
     @Test
     public void addAssignmentTestCase1 (){
-        StudentValidator studentValidator=new StudentValidator();
-        TemaLabValidator homeworkValidator=new TemaLabValidator();
-        NotaValidator gradeValidator=new NotaValidator();
-        ui.vs = studentValidator;
-        ui.vt = homeworkValidator;
-        ui.vn = gradeValidator;
-        StudentXMLRepo studentRepository=new StudentXMLRepo(studentValidator,"StudentiXML.xml");
-        TemaLabXMLRepo homeworkRepository=new TemaLabXMLRepo(homeworkValidator,"TemaLaboratorXML.xml");
-        NotaXMLRepo gradeRepository=new NotaXMLRepo(gradeValidator,"NotaXML.xml");
-        StudentXMLService studentService=new StudentXMLService(studentRepository);
-        TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
-        NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        
+        ui.vs = vs;
+        ui.vt = vt;
+        ui.vn = vn;
+        
         String[] parametersAddAssignmentValid={"1", "descriere", "6", "4"};
         try {
-            homeworkService.add(parametersAddAssignmentValid);
+            tmsrv.add(parametersAddAssignmentValid);
             assertTrue(true);
         } catch (ValidatorException exception){ 
             assertFalse(true);
@@ -73,21 +72,30 @@ public class GradeTest
     }
     @Test
     public void addGradeTestCase1 (){
-        StudentValidator studentValidator=new StudentValidator();
-        TemaLabValidator homeworkValidator=new TemaLabValidator();
-        NotaValidator gradeValidator=new NotaValidator();
-        ui.vs = studentValidator;
-        ui.vt = homeworkValidator;
-        ui.vn = gradeValidator;
-        StudentXMLRepo studentRepository=new StudentXMLRepo(studentValidator,"StudentiXML.xml");
-        TemaLabXMLRepo homeworkRepository=new TemaLabXMLRepo(homeworkValidator,"TemaLaboratorXML.xml");
-        NotaXMLRepo gradeRepository=new NotaXMLRepo(gradeValidator,"NotaXML.xml");
-        StudentXMLService studentService=new StudentXMLService(studentRepository);
-        TemaLabXMLService homeworkService=new TemaLabXMLService(homeworkRepository);
-        NotaXMLService gradeService=new NotaXMLService(gradeRepository);
+        
+        ui.vs = vs;
+        ui.vt = vt;
+        ui.vn = vn;
+    
         String[] parametersAddGradeValid={"1","22","6","4", "feedback", "9"};
         try {
-            gradeService.add(parametersAddGradeValid);
+            ntsrv.add(parametersAddGradeValid);
+            assertTrue(true);
+        } catch (ValidatorException exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addGradeTestCase2 (){
+        
+        ui.vs = vs;
+        ui.vt = vt;
+        ui.vn = vn;
+    
+        String[] parametersAddGradeValid={"1","21","6","4", "feedback", "9"};
+        try {
+            ntsrv.add(parametersAddGradeValid);
             assertTrue(true);
         } catch (ValidatorException exception){ 
             assertFalse(true);
@@ -101,6 +109,95 @@ public class GradeTest
             addAssignmentTestCase1();
             addGradeTestCase1();
             assertTrue(true);
+        } catch (Exception exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addAllTestCase2 (){
+        try {
+            addStudentTestCase1();
+            Student s = strepo.findOne("22");
+            if (s != null) {
+                addAssignmentTestCase1();
+                TemaLab t = tmrepo.findOne(1);
+                if (t != null) {
+                    addGradeTestCase1();
+                    assertTrue(true);
+                } else {
+                    assertFalse(true);
+                }
+            } else {
+                assertFalse(true);
+            }
+        } catch (Exception exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addAllTestCase3 (){
+        try {
+            addStudentTestCase1();
+            Student s = strepo.findOne("21");
+            if (s != null) {
+                addAssignmentTestCase1();
+                TemaLab t = tmrepo.findOne(1);
+                if (t != null) {
+                    addGradeTestCase1();
+                    assertTrue(true);
+                } else {
+                    assertFalse(true);
+                }
+            } else {
+                assertTrue(true);
+            }
+        } catch (Exception exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addAllTestCase4 (){
+        try {
+            addStudentTestCase1();
+            Student s = strepo.findOne("22");
+            if (s != null) {
+                addAssignmentTestCase1();
+                TemaLab t = tmrepo.findOne(2);
+                if (t != null) {
+                    addGradeTestCase1();
+                    assertTrue(true);
+                } else {
+                    assertTrue(true);
+                }
+            } else {
+                assertFalse(true);
+            }
+        } catch (Exception exception){ 
+            assertFalse(true);
+        }
+
+    }
+    @Test
+    public void addAllTestCase5 (){
+        try {
+            addStudentTestCase1();
+            Student s = strepo.findOne("21");
+            if (s != null) {
+                addAssignmentTestCase1();
+                TemaLab t = tmrepo.findOne(1);
+                if (t != null) {
+                    addGradeTestCase2();
+                    assertFalse(false);
+                } else {
+                    
+                    assertTrue(true);
+                }
+            } else {
+                assertFalse(false);
+            }
         } catch (Exception exception){ 
             assertFalse(true);
         }
